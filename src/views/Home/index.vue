@@ -11,21 +11,46 @@
         <div class="header-search"></div>
       </a>
     </header>
+    <Swiper ref="xxx" :autoplay = '1000' :loop = 'true'>
+      <SwiperItem>1</SwiperItem>
+      <SwiperItem>2</SwiperItem>
+      <SwiperItem>3</SwiperItem>
+    </Swiper>
   </div>
 </template>
 
 <script>
+
+import { Swiper, SwiperItem } from '@/components/Swiper'
+import { getBanner } from '@/api/cartoon'
+
 export default {
-  name: 'Home'
+  name: 'Home',
+  components: {
+    Swiper,
+    SwiperItem
+  },
+  methods: {
+    changeHandler (payload) {
+      console.log('index', payload)
+    }
+  },
+  created () {
+    getBanner().then(res => {
+      console.log(res)
+    })
+  }
 }
 </script>
 
 <style lang='scss' scoped>
+@import '~@/assets/styles/mixins.scss';
 .page-home{
   display: flex;
   flex-direction: column;
   height: 100%;
   .index-header {
+    @include border-bottom;
     display: flex;
     height: 44px;
     //三者等分平铺
